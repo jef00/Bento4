@@ -8,6 +8,7 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  workflow_dispatch:  # Add this to allow manual triggers
 
 jobs:
   build:
@@ -32,7 +33,7 @@ jobs:
 
     steps:
       # Check out the repository under $GITHUB_WORKSPACE, so that the jobs can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4 # Updated to v4
 
       # CMake Build
       - name: Release Build with CMake
@@ -54,6 +55,5 @@ jobs:
         if: github.event_name == 'push'
         uses: actions/upload-artifact@v4
         with:
+          name: bento4-sdk-${{ matrix.os }}  # Added required name field
           path: SDK/*.zip
-          overwrite: true
-          
