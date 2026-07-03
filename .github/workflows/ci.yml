@@ -33,7 +33,7 @@ jobs:
 
     steps:
       # Check out the repository under $GITHUB_WORKSPACE, so that the jobs can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
 
       # CMake Build
       - name: Release Build with CMake
@@ -53,8 +53,8 @@ jobs:
       # Upload the SDK
       - name: Upload SDK
         if: github.event_name == 'push'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
+          name: bento4-sdk-${{ matrix.os }}
           path: SDK/*.zip
-          overwrite: true
           
